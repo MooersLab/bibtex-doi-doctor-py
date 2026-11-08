@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bibtex-doi-doctor"
+dynamic = ["version"]
+description = "Repair DOI fields in BibTeX files and look up missing DOIs at Crossref, so litdb can load them."
+readme = "README.md"
+license = "GPL-3.0-only"
+license-files = ["LICENSE"]
+authors = [{ name = "Blaine Mooers", email = "blaine-mooers@ou.edu" }]
+requires-python = ">=3.9"
+dependencies = []
+keywords = ["bibtex", "doi", "crossref", "litdb", "bibliography"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Topic :: Text Processing :: Markup :: LaTeX",
+    "Intended Audience :: Science/Research",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "pytest-cov", "ruff"]
+
+[project.urls]
+Homepage = "https://github.com/MooersLab/bibtex-doi-doctor-py"
+Issues = "https://github.com/MooersLab/bibtex-doi-doctor-py/issues"
+
+[project.scripts]
+bibtex-doi-doctor = "bibtex_doi_doctor.cli:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "bibtex_doi_doctor.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["network: tests that contact Crossref and doi.org (run with 'make test-network')"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["UP006", "UP035"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["bibtex_doi_doctor"]
+known-local-folder = ["conftest"]

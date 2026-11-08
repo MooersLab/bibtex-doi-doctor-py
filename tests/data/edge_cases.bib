@@ -1,0 +1,54 @@
+% Edge cases taken from problems seen in a real 12,000-entry library.
+
+@comment{This comment block must survive unchanged.}
+
+@article{Sici1997,
+	author = {Old, Wiley},
+	title = {A paper with a SICI style DOI that must not be cut short},
+	year = {1997},
+	doi = {10.1002/(SICI)1096-987X(199709)18:12<1463::AID-JCC4>3.0.CO;2-H},
+}
+
+@article{Pasted2025,
+  author =	 {Someone, A.},
+  title =	 {An entry with a second entry pasted inside its doi field},
+  year =	 2025,
+  doi =		 {10.1107/s2052252524011862@article{, author = {Other, B.},
+                  title = {Pasted}, doi = {10.1107/s2052252524011771}, } },
+}
+
+@article{Placeholder2011,
+  author = {Rublack, N.},
+  title = {An entry whose doi field still holds a snippet placeholder},
+  year = {2011},
+  doi = {${2:ReplaceMe}},
+}
+
+@article{Artn2018,
+  author = {Peer, J.},
+  title = {An entry with an article number in front of the DOI},
+  year = {2018},
+  doi = {ARTN e5954
+10.7717/peerj.5954},
+}
+
+@article{Concat2005,
+  author = {Joined, U.},
+  title = {An entry whose url field holds two URLs run together},
+  year = {2005},
+  url = {http://dx.doi.org/10.1093/nar/gki943http://pubmedcentralcanada.ca/picrender.cgi?accid=PMC1298919&blobtype=pdf},
+}
+
+@article{Note2003,
+  author = {Noted, N.},
+  title = {An entry with its DOI in the note field},
+  year = {2003},
+  note = {Published online. doi: 10.1021/bi9517998.},
+}
+
+@book{Quoted1999,
+  author = "Quote, Q.",
+  title = "A book whose fields use " # "double quotes and concatenation",
+  year = 1999,
+  doi = "DOI 10.1007/978-1-60327-241-4_11"
+}

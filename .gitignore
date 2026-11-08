@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+build/
+dist/
+
+# Tools
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Outputs of bibtex-doi-doctor runs
+*-doctored.bib
+*-doi-report.tsv
+*-doi-cache.json
+*.bib.*.bak
+
+# macOS
+.DS_Store
