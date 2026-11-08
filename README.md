@@ -16,5 +16,14 @@ The script does two jobs.
 ## 2.DOI lookup 
    For entries without a DOI, the script first looks for a DOI inside the url, note, eprint, and howpublished fields. 
    If none is there, it queries Crossref with the title, first author, and year. 
-   A candidate is accepted only when the titles agree closely, the year is within one, and the first author's last name appears among the Crossref authors. 
+   We accept a candidate only when the titles match closely, the year is within one, and the first author's last name appears among the Crossref authors. 
    We then check every accepted DOI at doi.org before writing it.
+
+
+
+## Related repositories
+
+
+## Funding
+- NIH: R01 CA242845
+- NIH: P30 CA225520 (PI: R. Mannel); P30GM145423 (PI: A. West)
