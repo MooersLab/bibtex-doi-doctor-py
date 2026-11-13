@@ -47,12 +47,19 @@ COUNT_KEYS = (
 class Options:
     """Settings for one run. The command line fills these in."""
 
+    #: Contact Crossref and doi.org. False means format repair only.
     lookup: bool = True
+    #: Rename doi fields that hold no DOI to ``baddoi`` when no DOI is found.
     drop_bad: bool = False
-    types: frozenset = DEFAULT_TYPES  # empty frozenset means every type
+    #: Entry types to look up at Crossref. An empty frozenset means every type.
+    types: frozenset = DEFAULT_TYPES
+    #: Look up at most this many entries. 0 means no limit.
     limit: int = 0
+    #: Title similarity (0 to 1) needed to accept a Crossref match.
     threshold: float = 0.92
+    #: Weaker matches down to this similarity are reported as candidates.
     candidate_floor: float = 0.80
+    #: Number of parallel requests. All workers share one rate limit.
     workers: int = 4
 
 
@@ -60,8 +67,11 @@ class Options:
 class Result:
     """What a run produced."""
 
+    #: The repaired BibTeX text.
     text: str
-    report: list = field(default_factory=list)  # (citekey, action, old, new, detail)
+    #: Report rows as ``(citekey, action, old, new, detail)`` tuples, sorted by citekey.
+    report: list = field(default_factory=list)
+    #: Tallies such as ``reformatted``, ``found`` and ``candidate``, as shown in the summary.
     counts: dict = field(default_factory=lambda: dict.fromkeys(COUNT_KEYS, 0))
 
 

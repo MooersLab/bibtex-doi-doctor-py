@@ -22,9 +22,11 @@ classifiers = [
 
 [project.optional-dependencies]
 dev = ["pytest>=7", "pytest-cov", "ruff"]
+docs = ["sphinx>=7", "myst-parser>=3", "sphinx-rtd-theme>=2", "sphinx-copybutton>=0.5"]
 
 [project.urls]
 Homepage = "https://github.com/MooersLab/bibtex-doi-doctor-py"
+Documentation = "https://bibtex-doi-doctor-py.readthedocs.io"
 Issues = "https://github.com/MooersLab/bibtex-doi-doctor-py/issues"
 
 [project.scripts]

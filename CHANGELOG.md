@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Read the Docs documentation built with Sphinx and MyST, with new installation, tutorial, FAQ and Python API pages. Build it locally with `make docs`.
+- Packaging uses an SPDX license expression (needs setuptools 77 or later).
+
 ## 0.1.0 (2026-11-08)
 
 First packaged release.

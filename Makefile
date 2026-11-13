@@ -9,12 +9,15 @@ VENV   := .venv
 BIN    := $(VENV)/bin
 STAMP  := $(VENV)/.installed
 DEMO   := build/demo
+DOCS_STAMP := $(VENV)/.docs-installed
+DOCS_OUT   := docs/_build/html
 BIB    ?= examples/sample.bib
 
 .DEFAULT_GOAL := help
 
 .PHONY: help venv dev test test-network coverage lint format check \
-        demo demo-live run install install-uv uninstall-uv build clean distclean
+        demo demo-live run install install-uv uninstall-uv build clean distclean \
+        docs docs-open docs-linkcheck docs-clean
 
 help:  ## Show this list of targets
 	@awk 'BEGIN {FS = ":.*## "} /^[a-zA-Z_-]+:.*## / {printf "  \033[36m%-14s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -77,8 +80,25 @@ build: $(STAMP)  ## Build the sdist and wheel into dist/
 	$(BIN)/python -m pip install --quiet build
 	$(BIN)/python -m build
 
+$(DOCS_STAMP): $(STAMP) pyproject.toml
+	$(BIN)/python -m pip install --quiet -e ".[docs]"
+	@touch $(DOCS_STAMP)
+
+docs: $(DOCS_STAMP)  ## Build the HTML documentation into docs/_build/html
+	$(BIN)/sphinx-build -W --keep-going -b html docs $(DOCS_OUT)
+	@echo "Open $(DOCS_OUT)/index.html, or run 'make docs-open'."
+
+docs-open: docs  ## Build the documentation and open it in a browser
+	$(BIN)/python -m webbrowser -t "file://$(CURDIR)/$(DOCS_OUT)/index.html"
+
+docs-linkcheck: $(DOCS_STAMP)  ## Check external links in the documentation (needs network)
+	$(BIN)/sphinx-build -b linkcheck docs docs/_build/linkcheck
+
+docs-clean:  ## Remove the built documentation
+	rm -rf docs/_build
+
 clean:  ## Remove build output and caches
-	rm -rf build dist *.egg-info src/*.egg-info .pytest_cache .ruff_cache .coverage htmlcov
+	rm -rf build dist *.egg-info src/*.egg-info .pytest_cache .ruff_cache .coverage htmlcov docs/_build
 	find . -name __pycache__ -type d -prune -exec rm -rf {} +
 
 distclean: clean  ## Also remove the virtual environment

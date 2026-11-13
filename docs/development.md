@@ -29,8 +29,11 @@ Run `make` with no arguments to see this list with descriptions.
 | `make run BIB=... ARGS=...` | Run the tool from `.venv` on any file. |
 | `make install` | `pip install --user .` |
 | `make install-uv` | `uv tool install .` |
+| `make docs` | Build this documentation into `docs/_build/html`, treating warnings as errors. |
+| `make docs-open` | Build the documentation and open it in a browser. |
+| `make docs-linkcheck` | Check the external links in the documentation. |
 | `make build` | Build a wheel and sdist into `dist/`. |
-| `make clean` | Remove build output and caches. |
+| `make clean` | Remove build output, caches and the built documentation. |
 | `make distclean` | Also remove `.venv`. |
 
 ## Tests
@@ -48,8 +51,29 @@ Run `make` with no arguments to see this list with descriptions.
 
 To add a regression test for a new problem, put a minimal entry into `edge_cases.bib` (or a string in the test itself), then assert on `doctor(...).text` or `doctor(...).report`.
 
+## Documentation
+
+The documentation is written in Markdown and built with [Sphinx](https://www.sphinx-doc.org/), the [MyST](https://myst-parser.readthedocs.io/) Markdown parser and the Read the Docs theme. The API page is generated from the docstrings in `src/`.
+
+| File | Role |
+|------|------|
+| `docs/conf.py` | Sphinx settings. |
+| `docs/index.md` | The landing page and the table of contents. |
+| `docs/*.md` | One file per page. |
+| `docs/api.md` | Pulls the docstrings in with `automodule`. |
+| `.readthedocs.yaml` | Tells Read the Docs how to build the site. |
+
+```console
+$ make docs        # build; any warning stops the build
+$ make docs-open   # build and open in the browser
+```
+
+To add a page, create `docs/newpage.md` and add `newpage` to one of the `toctree` blocks in `docs/index.md`. Sphinx warns about a page that is in no table of contents, and `make docs` treats that warning as an error.
+
+Read the Docs rebuilds the site on every push to GitHub. It installs the package with the `docs` extra from `pyproject.toml` and fails the build on any warning, just like `make docs`.
+
 ## Releasing
 
 1. Update `__version__` in `src/bibtex_doi_doctor/__init__.py`, the version badge in `README.md`, and `CHANGELOG.md`.
-2. Run `make check` and `make test-network`.
+2. Run `make check`, `make test-network` and `make docs`.
 3. Commit, tag (`git tag v0.1.1`) and push the tag.
