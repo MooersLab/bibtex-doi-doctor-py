@@ -1,6 +1,7 @@
 ![Version](https://img.shields.io/static/v1?label=bibtex-doi-doctor-py&message=0.1.0&color=brightgreen)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![tests](https://github.com/MooersLab/bibtex-doi-doctor-py/actions/workflows/tests.yml/badge.svg)](https://github.com/MooersLab/bibtex-doi-doctor-py/actions/workflows/tests.yml)
+[![Documentation](https://readthedocs.org/projects/bibtex-doi-doctor-py/badge/?version=latest)](https://bibtex-doi-doctor-py.readthedocs.io/en/latest/)
 # bibtex-doi-doctor-py
 
 This script cleans up a BibTeX library file, so Dr. John Kitchin's [litdb](https://github.com/jkitchin/litdb) package can use the entries.
@@ -236,11 +237,17 @@ The full reference is in [docs/usage.md](docs/usage.md).
 
 ## Documentation
 
+The full documentation is at **https://bibtex-doi-doctor-py.readthedocs.io**. Build it locally with `make docs`. The same pages are also readable on GitHub:
+
+- [docs/installation.md](docs/installation.md). Every installation route.
+- [docs/tutorial.md](docs/tutorial.md). The tutorial above, in more detail.
 - [docs/usage.md](docs/usage.md). Every option, the output files and exit codes.
 - [docs/report.md](docs/report.md). What each report action means and what to do about it.
 - [docs/how-it-works.md](docs/how-it-works.md). The three passes, the matching rules, and the code layout.
 - [docs/litdb.md](docs/litdb.md). A workflow for loading a large library into litdb.
-- [docs/development.md](docs/development.md). Make targets, tests and releases.
+- [docs/faq.md](docs/faq.md). Common questions, such as why a DOI was not written.
+- [docs/api.md](docs/api.md). Using the tool from Python.
+- [docs/development.md](docs/development.md). Make targets, tests, documentation and releases.
 - [CHANGELOG.md](CHANGELOG.md).
 
 ## Related repositories
