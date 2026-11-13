@@ -16,12 +16,12 @@ The script does two jobs.
 
 ## 2. DOI lookup
    For entries without a DOI, the script first looks for a DOI inside the url, note, eprint, and howpublished fields.
-   If none is there, it queries Crossref with the title, first author, and year.
+   If none are there, it queries Crossref with the title, first author, and year.
    We accept a candidate only when the titles match closely, the year is within one, and the first author's last name appears among the Crossref authors.
    We then check every accepted DOI at doi.org before writing it.
 
 Only the DOI fields change.
-Comments, `@string` blocks, field order, indentation and line endings stay exactly as they were, so a `git diff` of your library shows only the DOI lines.
+Comments, `@string` blocks, field order, indentation, and line endings stay exactly as they were, so a `git diff` of your library shows only the DOI lines.
 The input file is never overwritten unless you ask for it with `--in-place`, which first writes a timestamped backup.
 
 ## Requirements
@@ -136,7 +136,7 @@ Four things happened.
 1. The Coot entry lost its `doi:` prefix.
 2. The XDS entry lost its `https://doi.org/` prefix.
 3. The Protein Data Bank entry had lost the leading `1` of its DOI. The tool put it back.
-4. The CCP4 entry had no doi field, but its `url` field pointed to a Wiley PDF link that contained the DOI. The tool pulled the DOI out, dropped the `?download=true` tail, and added a `doi` line just after the citekey.
+4. The CCP4 entry had no DOI field, but its `url` field pointed to a Wiley PDF link that contained the DOI. The tool pulled the DOI out, dropped the `?download=true` tail, and added a `doi` line just after the citekey.
 
 Nothing else in the file changed.
 The comments at the top of the file and the `@string{actad = ...}` line are untouched.
@@ -163,7 +163,7 @@ The next step fixes both.
 
 ### Step 3. Look up missing DOIs at Crossref
 
-Run the tool again without `--no-lookup`. Give Crossref an email address so that your requests go to its faster "polite pool".
+Run the tool again without `--no-lookup`. Provide Crossref with an email address so your requests go to its faster "polite pool".
 
 ```sh
 bibtex-doi-doctor sample.bib --mailto you@example.edu
@@ -176,7 +176,7 @@ Looking up 2 entries at Crossref ...
 ...
 Crossref lookups:             2
   DOI found and verified:     2
-  candidates to review:       0
+  Candidates to review:       0
   ...
 Skipped by entry type:        1
 ```
@@ -187,10 +187,10 @@ Now `sample-doctored.bib` also has these changes.
 - The AlphaFold entry's `ISSN: 0028-0836` was replaced with `10.1038/s41586-021-03819-2`.
 - The `@misc` entry for the litdb repository was skipped. Entry types such as `misc` are not looked up unless you pass `--types all`, because Crossref seldom has them.
 
-All four DOIs from Step 1 were also checked at doi.org this time.
+This time, we also checked all four DOIs from Step 1 at doi.org.
 
-When the title, year or author do not all agree, the DOI is not written.
-It goes into the report as a `candidate` together with the Crossref title, so you can decide.
+When the title, year, or author do not all agree, the DOI is not written.
+It appears in the report as a `candidate` alongside the Crossref title, so you can decide.
 
 ### Step 4. Run it on your own library
 
@@ -237,7 +237,9 @@ The full reference is in [docs/usage.md](docs/usage.md).
 
 ## Documentation
 
-The full documentation is at **https://bibtex-doi-doctor-py.readthedocs.io**. Build it locally with `make docs`. The same pages are also readable on GitHub:
+
+The full documentation is at **https://bibtex-doi-doctor-py.readthedocs.io**.
+Build it locally with `make docs`. The same pages are also readable on GitHub:
 
 - [docs/installation.md](docs/installation.md). Every installation route.
 - [docs/tutorial.md](docs/tutorial.md). The tutorial above, in more detail.
@@ -256,4 +258,5 @@ The full documentation is at **https://bibtex-doi-doctor-py.readthedocs.io**. Bu
 
 ## Funding
 - NIH: R01 CA242845
-- NIH: P30 CA225520 (PI: R. Mannel); P30GM145423 (PI: A. West)
+- NIH: P30 CA225520 (PI: R. Mannel);
+- P30GM145423 (PI: A. West)
